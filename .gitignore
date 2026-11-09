@@ -1,0 +1,9 @@
+# Mac / Windows / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Firebase local files
+.firebase/
+firebase-debug.log
+node_modules/
