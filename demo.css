@@ -1,0 +1,43 @@
+.tt-demo{position:relative;width:100%;max-width:520px;margin:0 auto;aspect-ratio:1/1.05;--ease:cubic-bezier(.22,1,.36,1)}
+.tt-glow{position:absolute;inset:8% 4%;border-radius:50%;background:radial-gradient(circle,rgba(255,196,0,.28),transparent 65%);opacity:.35;transition:opacity .5s;filter:blur(20px)}
+.tt-demo.is-tap .tt-glow{opacity:1}
+
+/* CARD */
+.tt-card{position:absolute;left:4%;top:50%;width:48%;transform:translateY(-50%)}
+.tt-card-img{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 28px rgba(0,0,0,.55));transition:transform .4s var(--ease),filter .4s}
+.tt-card-fallback{aspect-ratio:55/87;border-radius:14px;background:#FFC400;color:#050505;display:grid;place-items:center;font:800 20px Sora,sans-serif}
+.tt-demo.is-tap .tt-card-img{animation:tt-card-hit .7s ease-out}
+@keyframes tt-card-hit{0%{transform:scale(1);filter:drop-shadow(0 18px 28px rgba(0,0,0,.55))}35%{transform:scale(1.03);filter:drop-shadow(0 0 2px #FFC400) drop-shadow(0 0 18px rgba(255,196,0,.9))}100%{transform:scale(1);filter:drop-shadow(0 18px 28px rgba(0,0,0,.55))}}
+
+/* TAP RINGS */
+.tt-rings{position:absolute;left:46%;top:50%;width:0;height:0;pointer-events:none}
+.tt-rings i{position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:2px solid #FFC400;opacity:0;transform:scale(.2)}
+.tt-demo.is-tap .tt-rings i{animation:tt-ring 1.2s ease-out forwards}
+.tt-rings i:nth-child(2){animation-delay:.18s!important}
+.tt-rings i:nth-child(3){animation-delay:.36s!important}
+@keyframes tt-ring{0%{opacity:.95;transform:scale(.2)}100%{opacity:0;transform:scale(2.6)}}
+
+/* ANDROID PHONE (patla border) */
+.tt-phone{position:absolute;right:4%;top:50%;width:36%;max-width:210px;padding:4px;border-radius:30px;
+  background:linear-gradient(145deg,#34343a,#0b0b0c 55%,#222226);
+  box-shadow:0 0 0 1.5px #4a4a52,0 30px 60px rgba(0,0,0,.6);
+  transform:translate(40%,-50%) rotate(10deg) scale(.94);opacity:0;
+  transition:transform 1.1s var(--ease),opacity .6s;z-index:2}
+.tt-phone::before,.tt-phone::after{content:"";position:absolute;right:-3px;width:3px;border-radius:2px;background:#3a3a42}
+.tt-phone::before{top:24%;height:10%}   /* power button */
+.tt-phone::after{top:38%;height:17%}    /* volume button */
+.tt-demo.is-approach .tt-phone{transform:translate(-52%,-50%) rotate(-3deg) scale(1);opacity:1}
+.tt-demo.is-tap .tt-phone{animation:tt-tap .5s ease-out}
+@keyframes tt-tap{0%{transform:translate(-52%,-50%) rotate(-3deg)}40%{transform:translate(-58%,-50%) rotate(-5deg) scale(.97)}100%{transform:translate(-52%,-50%) rotate(-3deg)}}
+
+.tt-screen{position:relative;aspect-ratio:862/1920;border-radius:26px;overflow:hidden;background:#000}
+.tt-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity .35s,transform .7s var(--ease)}
+.tt-demo.is-live .tt-video{opacity:1;transform:none}
+.tt-cam{position:absolute;top:9px;left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:#000;box-shadow:0 0 0 1.5px #1a1a1d;z-index:3}
+.tt-screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(115deg,rgba(255,255,255,.08),transparent 35%)}
+
+@media(max-width:640px){.tt-phone{width:42%}}
+@media(prefers-reduced-motion:reduce){
+  .tt-phone{transition:none;opacity:1;transform:translate(-52%,-50%) rotate(-3deg)}
+  .tt-video{opacity:1;transform:none;transition:none}
+}

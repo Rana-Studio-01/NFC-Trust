@@ -1,0 +1,161 @@
+/* ==========================================================================
+   NFC Trust - catalog.css  (नई file)
+   1) Admin panel के popup (Edit, Confirm वगैरह) अब admin के ऊपर दिखते हैं  <- buttons "काम नहीं कर रहे" वाली दिक्कत यही थी
+   2) Product card में photos का auto-slider, offer %, Out of stock
+   3) Custom card order का form
+   4) Admin का Products tab
+   5) "Generate QR code & link" button
+   इसे index.html में admin.css / demo.css के बाद जोड़ा गया है।
+   ========================================================================== */
+
+/* ---------- 1) Popup हमेशा admin panel (z-index 350) के ऊपर ---------- */
+.modal-overlay { z-index: 420; }
+
+/* ---------- 2) Product photos slider ---------- */
+.product-media { position: relative; display: block; width: 100%; cursor: pointer; background: radial-gradient(circle at 50% 30%, #1c1c1f, var(--surface)); }
+.slider { position: relative; }
+.slides {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
+}
+.slides::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always; aspect-ratio: 1 / 1; display: grid; place-items: center; padding: 16px; }
+.slide .art-img { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.5)); aspect-ratio: auto; }
+.slide .art { width: 100%; height: auto; border-radius: 10px; filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.5)); }
+.dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 6px; pointer-events: none; }
+.dots i { width: 6px; height: 6px; border-radius: 99px; background: #4a4a52; transition: width 0.3s var(--ease), background 0.3s; }
+.dots i.on { width: 18px; background: var(--yellow); }
+.offer-chip { position: absolute; top: 12px; left: 12px; z-index: 2; font-size: 0.78rem; padding: 5px 12px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4); }
+.soldout-tag {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; padding: 9px 20px; border-radius: 99px;
+  background: rgba(5, 5, 5, 0.9); border: 1px solid var(--danger); color: #ff8a8a; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.02em; white-space: nowrap;
+}
+.product.is-soldout .slides, .detail-art.product-media .slides { transition: filter 0.3s; }
+.product.is-soldout .slides { filter: grayscale(0.7) brightness(0.65); }
+.product.is-soldout:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.detail-art.product-media { cursor: default; border-radius: var(--r-md); overflow: hidden; padding: 0; }
+.detail-art .slide { padding: 10px; }
+
+/* ---------- 3) Custom card order form ---------- */
+.custom-form { display: grid; gap: 14px; }
+.radio-group { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.radio-group legend { font-weight: 700; color: #e4e4e7; margin-bottom: 8px; padding: 0; }
+.radio-card { display: flex; align-items: flex-start; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-md); cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.radio-card:hover { border-color: #4a4a52; }
+.radio-card:has(input:checked) { border-color: var(--yellow); background: rgba(255, 196, 0, 0.07); }
+.radio-card input { width: 20px; height: 20px; accent-color: var(--yellow); margin: 2px 0 0; padding: 0; flex: none; }
+.radio-card span { display: flex; flex-direction: column; gap: 2px; }
+.radio-card strong { font-size: 0.97rem; }
+.radio-card em { font-style: normal; color: var(--muted); font-size: 0.86rem; }
+
+/* ---------- 4) Admin: Products tab ---------- */
+.a-prod { display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: center; padding: 12px; border-radius: 14px; background: var(--a-panel); border: 1px solid var(--a-line); }
+.a-prod.is-out { border-color: rgba(239, 68, 68, 0.45); }
+.a-prod-imgs { display: flex; gap: 6px; }
+.a-prod-imgs img, .a-prod-imgs span { width: 56px; height: 56px; border-radius: 10px; object-fit: contain; background: var(--a-panel-2); display: grid; place-items: center; color: var(--yellow); font-weight: 800; }
+.a-prod-main { display: grid; gap: 4px; min-width: 0; justify-items: start; }
+.a-prod-main b { font-size: 0.98rem; }
+.a-prod-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.a-prod-price strong { font-family: var(--font-head); font-size: 1.1rem; }
+.a-prod-price s { color: var(--muted-2); font-size: 0.85rem; }
+.a-prod-price .off { color: var(--success); font-weight: 800; font-size: 0.8rem; }
+.a-prod-sub { color: var(--muted); font-size: 0.82rem; }
+.a-prod .a-row-actions { grid-column: 1 / -1; flex-wrap: wrap; }
+.a-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.a-offer { font-size: 0.88rem; color: var(--muted); padding: 10px 12px; border-radius: 12px; background: var(--a-panel-2); border: 1px dashed var(--a-line); }
+.a-offer.is-on { color: #86efac; border-color: rgba(34, 197, 94, 0.5); background: rgba(34, 197, 94, 0.08); font-weight: 700; }
+@media (min-width: 700px) {
+  .a-prod { grid-template-columns: auto 1fr auto; }
+  .a-prod .a-row-actions { grid-column: auto; }
+}
+
+/* ---------- 5) "Generate QR code & link" button (hero) ---------- */
+.hero-cta--qr { margin-top: 12px; }
+.btn-qr { border-color: rgba(255, 196, 0, 0.55); color: var(--yellow); background: rgba(255, 196, 0, 0.06); }
+.btn-qr:hover { background: rgba(255, 196, 0, 0.14); border-color: var(--yellow); }
+.btn-qr svg { width: 22px; height: 22px; }
+
+/* ==========================================================================
+   6) Product cards ka size  (sirf layout/size; baaki design wahi)
+   - Mobile: ek row mein 2 card -> screen par 4 card dikhte hain
+   - Tablet: 3 card | Laptop/Desktop: 4 card
+   - Details dabane par popup mobile mein poori screen mein khulta hai
+   ========================================================================== */
+.shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+
+/* ---- Chhoti screen (mobile): compact card ---- */
+.product { border-radius: 16px; }
+.product .slide { padding: 6px; }
+.product .slide .art-img, .product .slide .art { border-radius: 8px; }
+.product .dots { bottom: 5px; gap: 4px; }
+.product .dots i { width: 5px; height: 5px; }
+.product .dots i.on { width: 14px; }
+.product .offer-chip { top: 8px; left: 8px; font-size: 0.66rem; padding: 3px 8px; }
+.product .soldout-tag { font-size: 0.7rem; padding: 6px 12px; }
+.product .product-info { padding: 9px 10px 11px; gap: 5px; }
+.product .product-name { font-size: 0.84rem; line-height: 1.25; min-height: 2.5em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.product .product-short { display: none; }
+.product .product-price { gap: 6px; }
+.product .product-price strong { font-size: 1.05rem; }
+.product .product-price s { font-size: 0.76rem; }
+.product .product-price .off { display: none; }          /* % off pehle se upar chip mein dikhta hai */
+.product .product-warranty { font-size: 0.7rem; gap: 4px; line-height: 1.2; }
+.product .product-warranty svg { width: 12px; height: 12px; margin-top: 0; }
+.product .product-actions { grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; }
+.product .product-actions .btn { min-height: 36px; padding: 6px 4px; font-size: 0.78rem; }
+.product:hover { transform: none; }
+
+/* ---- Tablet ---- */
+@media (min-width: 720px) {
+  .shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .product .slide { padding: 10px; }
+  .product .dots { bottom: 8px; gap: 6px; }
+  .product .dots i { width: 6px; height: 6px; }
+  .product .dots i.on { width: 18px; }
+  .product .offer-chip { top: 12px; left: 12px; font-size: 0.76rem; padding: 5px 12px; }
+  .product .soldout-tag { font-size: 0.9rem; padding: 9px 20px; }
+  .product .product-info { padding: 14px 16px 18px; gap: 7px; }
+  .product .product-name { font-size: 1rem; min-height: 0; }
+  .product .product-short { display: block; font-size: 0.86rem; }
+  .product .product-price strong { font-size: 1.3rem; }
+  .product .product-price s { font-size: 0.9rem; }
+  .product .product-price .off { display: inline; font-size: 0.8rem; }
+  .product .product-warranty { font-size: 0.82rem; gap: 6px; }
+  .product .product-warranty svg { width: 16px; height: 16px; }
+  .product .product-actions { grid-template-columns: 1.3fr 1fr; gap: 10px; margin-top: 6px; }
+  .product .product-actions .btn { min-height: 42px; padding: 9px 12px; font-size: 0.9rem; }
+  .product:hover { transform: translateY(-4px); }
+  .product.is-soldout:hover { transform: none; }
+}
+
+/* ---- Laptop / Desktop ---- */
+@media (min-width: 1000px) {
+  .shop-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .product .product-info { padding: 12px 14px 16px; }
+  .product .product-name { font-size: 0.96rem; }
+  .product .product-price strong { font-size: 1.2rem; }
+}
+
+/* ---- Details popup: mobile par poori screen, kisi bhi device par photo fit ---- */
+.detail-art .slide { max-height: 60vh; max-height: 60dvh; }
+.detail-art .slide .art-img { max-height: 100%; }
+@media (max-width: 560px) {
+  .modal-overlay:has(.modal--product) { padding: 0; place-items: stretch; }
+  .modal.modal--product { max-width: none; width: 100%; height: 100vh; height: 100dvh; max-height: 100dvh; border-radius: 0; border: 0; transform: translateY(24px); }
+  .modal-overlay.is-open .modal.modal--product { transform: none; }
+  .modal--product .modal-head { padding-top: calc(12px + var(--safe-top)); }
+  .modal--product .modal-body { padding: 8px 16px calc(22px + var(--safe-bottom)); }
+  .modal--product .detail-art .slide { max-height: 52vh; max-height: 52dvh; }
+}
+
+/* ==========================================================================
+   7) Bulk line (warranty ke upar) aur Admin list scroll fix
+   ========================================================================== */
+.product .product-bulk { color: var(--yellow); font-weight: 700; font-size: 0.7rem; line-height: 1.25; }
+@media (min-width: 720px) { .product .product-bulk { font-size: 0.84rem; } }
+.bulk-text { color: var(--yellow); }
+
+/* Admin: Products / Users / Reviews list par kahin bhi touch karke upar-neeche scroll ho
+   (pehle overscroll-behavior ne scroll ko page tak jane se rok rakha tha, isliye sirf kinare se scroll hota tha) */
+.a-page .a-list { overflow: visible; overscroll-behavior: auto; min-height: auto; }
+.a-page .a-prod, .a-page .a-row { touch-action: pan-y; }
