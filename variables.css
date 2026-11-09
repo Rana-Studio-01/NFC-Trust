@@ -1,0 +1,50 @@
+/* ==========================================================================
+   NFC Trust - variables.css
+   सारे colors, fonts और sizes यहीं हैं। Theme बदलनी हो तो सिर्फ़ यहाँ बदलें।
+   Theme: काला background + पीला (yellow) और सफ़ेद
+   ========================================================================== */
+:root {
+  /* Colors */
+  --bg: #050505;
+  --surface: #0e0e0f;
+  --surface-2: #151516;
+  --surface-3: #1d1d20;
+  --line: #27272b;
+  --line-soft: #1c1c1f;
+  --text: #ffffff;
+  --muted: #a3a3ab;
+  --muted-2: #74747c;
+  --yellow: #ffc400;
+  --yellow-2: #ffd84d;
+  --yellow-deep: #c89600;
+  --on-yellow: #0a0a0a;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warn: #f59e0b;
+  --info: #38bdf8;
+
+  /* Fonts */
+  --font-head: "Sora", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Radius */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  /* Layout */
+  --container: 1200px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --header-h: 64px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* Shadows & glow */
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
+  --glow: 0 0 0 1px rgba(255, 196, 0, 0.35), 0 10px 40px rgba(255, 196, 0, 0.14);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

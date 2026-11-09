@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
+<title>QR &amp; Link Studio | NFC Trust</title>
+<meta name="description" content="Make a link and a full HD QR code for Instagram, WhatsApp, YouTube, Wi-Fi, UPI and more. Scan any QR code too.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="qr.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="round" href="index.html" aria-label="Back to home" data-ic="back"></a>
+  <a class="brand" href="index.html"><img src="logo.svg" alt="" width="32" height="32"><span>NFC Trust</span></a>
+  <button class="round gold" id="scanBtn" type="button" aria-label="Scan a QR code" data-ic="scan"></button>
+</header>
+
+<main class="wrap">
+  <h1>QR &amp; link studio</h1>
+  <p class="sub">Type a handle or paste a link. Get a ready link and a sharp QR code. Use the scan button to read any QR.</p>
+
+  <div class="tabs" data-i="0" role="tablist">
+    <i class="ind"></i>
+    <button class="tab" type="button" role="tab" aria-selected="true" data-ic="link" data-s="18">NFC Trust</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" data-ic="qr" data-s="18">Generate QR</button>
+  </div>
+
+  <div class="inapp" id="inapp" hidden>Downloads can fail inside Instagram or Facebook. Tap the menu and choose <b>Open in Chrome</b> or <b>Open in Safari</b>.</div>
+
+  <!-- TAB 1 -->
+  <section class="panel card in" id="p0" role="tabpanel">
+    <div class="fld">
+      <label for="ddBtn">Card type <i>(optional)</i></label>
+      <div class="dd" id="dd">
+        <button type="button" class="dd-btn" id="ddBtn" aria-haspopup="listbox" aria-expanded="false">
+          <span class="ddi"></span><span class="ddl"></span><span class="chev" data-ic="chev" data-s="18"></span>
+        </button>
+        <ul class="dd-list" id="ddList" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="paste" id="pasteBox">
+      <div class="fld">
+        <label for="link0">Link</label>
+        <div class="prow">
+          <input class="linkIn" id="link0" type="text" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="https://">
+          <button type="button" class="btn ghost sm pasteBtn" data-ic="paste" data-s="18">Paste</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fields" id="fields"></div>
+    <div id="photoBox"></div>
+    <button type="button" class="btn primary" id="genBtn" hidden>Generate link &amp; QR</button>
+    <div class="resSlot"></div>
+  </section>
+
+  <!-- TAB 2 -->
+  <section class="panel card" id="p1" role="tabpanel" hidden>
+    <div class="paste">
+      <div class="fld">
+        <label for="link1">Paste your link</label>
+        <div class="prow">
+          <input class="linkIn" id="link1" type="text" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="https://">
+          <button type="button" class="btn ghost sm pasteBtn" data-ic="paste" data-s="18">Paste</button>
+        </div>
+      </div>
+    </div>
+    <div class="resSlot"></div>
+  </section>
+</main>
+
+<template id="resT">
+  <div class="res" hidden>
+    <div class="qr-frame"><canvas aria-label="Generated QR code"></canvas></div>
+    <div class="linkrow">
+      <span class="linktxt"></span>
+      <button type="button" class="round sm copy" aria-label="Copy link" data-ic="copy" data-s="18"></button>
+      <button type="button" class="round sm open" aria-label="Open link" data-ic="open" data-s="18"></button>
+    </div>
+    <button type="button" class="btn primary dl" data-ic="download">Download HD QR</button>
+    <p class="note">1920 × 1920 px · PNG · 1:1</p>
+  </div>
+</template>
+
+<!-- Scanner -->
+<div class="scan" id="scan" hidden role="dialog" aria-modal="true" aria-label="Scan QR code">
+  <video id="cam" playsinline muted></video>
+  <div class="reticle" aria-hidden="true"><b></b><b></b><b></b><b></b><i class="beam"></i></div>
+  <button type="button" class="round close" id="scanClose" aria-label="Close scanner" data-ic="x"></button>
+  <p class="camErr" id="camErr" hidden>Camera is not available. Allow camera access, or pick a photo from your gallery.</p>
+  <div class="scanbar">
+    <button type="button" class="btn ghost" id="scanGal" data-ic="image" data-s="20">Scan from gallery</button>
+    <input type="file" id="scanFile" accept="image/*" hidden>
+  </div>
+  <div class="sheet" id="sheet" hidden>
+    <p class="sheet-k">QR code says</p>
+    <p class="sheet-v" id="sheetV"></p>
+    <div class="sheet-b">
+      <button type="button" class="btn primary sm" id="shVisit" data-ic="open" data-s="18">Visit link</button>
+      <button type="button" class="btn ghost sm" id="shCopy" data-ic="copy" data-s="18">Copy</button>
+      <button type="button" class="btn ghost sm" id="shMake" data-ic="qr" data-s="18">Make new QR</button>
+      <button type="button" class="btn ghost sm" id="shAgain" data-ic="scan" data-s="18">Scan again</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="qrcode.min.js"></script>
+<script src="jsqr.min.js"></script>
+<script src="qr-links.js"></script>
+<script src="qr-engine.js"></script>
+<script src="qr-scan.js"></script>
+<script src="qr-page.js"></script>
+</body>
+</html>
