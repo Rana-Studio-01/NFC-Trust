@@ -10,25 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!--
-=====================================================================
-  all.html  -  ALL-IN-ONE NFC CARD PAGE  (HTML + CSS + JS, ek hi file)
-
-  KAISE BADLNA HAI:
-  1. Ctrl+F karke "REPLACE" dhoondhiye aur har REPLACE apni asli detail se badal dijiye.
-       https://instagram.com/REPLACE_INSTAGRAM_USERNAME -> https://instagram.com/sameer_rana
-       https://wa.me/REPLACE_WHATSAPP_NUMBER            -> https://wa.me/919876543210
-       (91 = country code, + ya space nahi)
-  2. LOGO: logo.png file isi folder mein rakhiye (ya header mein <img src="..."> badal dijiye).
-  3. NAAM: header ke <h1> mein jo naam hai, wahi Save contact mein apne aap jaata hai.
-  4. NUMBER: Save contact button mein data-phone="+919876543210" (country code ke saath).
-  5. Jo REPLACE na badlein, woh row dabane par "link set nahi hai" dikhayegi.
-     Live karne se pehle neeche HIDE_UNSET_ROWS = true kar dijiye
-     (bina link wali rows apne aap chhup jayengi).
-  6. File apni website par upload kijiye aur uska link NFC card mein likh dijiye.
-=====================================================================
--->
-
 <style>
   :root{
     --bg:#000000;
@@ -52,7 +33,6 @@
     padding-top:env(safe-area-inset-top,0px);
     -webkit-font-smoothing:antialiased;
   }
-  /* phone ke status bar ke peeche rows na dikhein */
   body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:15}
   a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
@@ -61,7 +41,6 @@
 
   .wrap{max-width:560px;margin:0 auto}
 
-  /* ---------- top header: logo | naam | save contact ---------- */
   .top{
     position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
     display:flex;align-items:center;gap:12px;
@@ -82,7 +61,6 @@
   .save:active{transform:scale(.97)}
   .intro{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
 
-  /* ---------- sections + rows ---------- */
   .sec{margin-top:22px}
   .intro + .sec{margin-top:14px}
   .sec h2{font-size:14px;font-weight:600;color:var(--muted);margin:0 4px 8px}
@@ -104,7 +82,6 @@
   .go{flex:none;width:18px;height:18px;color:var(--muted)}
   .row:hover .go{color:var(--yellow)}
 
-  /* icon colours (har platform ka apna rang) */
   .c-instagram{background:linear-gradient(45deg,#feda75,#fa7e1e 28%,#d62976 55%,#962fbf 78%,#4f5bd5)}
   .c-whatsapp{background:#25D366}
   .c-facebook{background:#1877F2}
@@ -116,7 +93,6 @@
   .c-wifi{background:var(--yellow);color:#000}
   .c-plain{background:var(--surface-2);color:var(--yellow);border:1px solid var(--line)}
 
-  /* wifi panel */
   .wifi-box{
     margin-top:-2px;padding:12px;border-radius:var(--radius);
     background:var(--surface);border:1px solid var(--yellow);display:grid;gap:10px;
@@ -131,7 +107,6 @@
   }
   .copy svg{width:16px;height:16px}
 
-  /* ---------- footer ---------- */
   .foot{margin-top:34px;text-align:center;color:var(--muted);font-size:13px}
   .foot b{color:var(--yellow);font-weight:600}
   .by{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:10px}
@@ -144,7 +119,6 @@
   .igbtn:hover{filter:brightness(1.1)}
   .igbtn:active{transform:scale(.96)}
 
-  /* sparkle (Instagram dabane par) */
   .spark{
     position:fixed;z-index:30;width:12px;height:12px;pointer-events:none;
     clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);
@@ -164,12 +138,10 @@
   }
   .toast.show{opacity:1;transform:translate(-50%,0)}
 
-  /* ---------- chhoti screen ---------- */
   @media (max-width:359px){
     .save .long{display:none}
     .top h1{font-size:16px}
   }
-  /* ---------- laptop / bada screen: 2 column ---------- */
   @media (min-width:820px){
     .wrap{max-width:900px}
     .list{grid-template-columns:1fr 1fr;gap:10px}
@@ -183,7 +155,6 @@
 </head>
 <body>
 
-<!-- icons (ek baar define, baar-baar use) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
@@ -206,48 +177,43 @@
 
 <main class="wrap">
 
-  <!-- ================= HEADER: logo | naam | save contact ================= -->
   <header class="top">
-    <!-- logo.png isi folder mein rakhiye. Na mile to logo chhup jaata hai -->
     <img class="logo" src="logo.png" alt="Logo" width="40" height="40" onerror="this.style.display='none'">
     <h1 id="brandName">Sameer Rana</h1>
 
-    <!-- Save contact: naam upar wale <h1> se aata hai. Number country code ke saath likhiye -->
     <button class="save" id="saveBtn" type="button"
-      data-phone="REPLACE_PHONE_NUMBER"
-      data-email="REPLACE_EMAIL"
-      data-site="REPLACE_WEBSITE_LINK">
+      data-phone="917505488309"
+      data-email="skrsameer0786@gmail.com"
+      data-site="https://nfctrust.online">
       <svg aria-hidden="true"><use href="#i-contact"/></svg><span>Save<span class="long"> contact</span></span>
     </button>
   </header>
 
   <p class="intro">All platforms in one place. Tap any link to connect.</p>
 
-  <!-- ================= SOCIAL ================= -->
   <section class="sec">
     <h2>Social</h2>
     <div class="list">
 
-      <a class="row" href="https://instagram.com/REPLACE_INSTAGRAM_USERNAME">
+      <a class="row" href="https://www.instagram.com/trigger_craft_x">
         <span class="ic c-instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
         <span class="txt"><b>Instagram</b><small>Follow on Instagram</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <!-- WhatsApp: country code ke saath number likhiye, + ya space nahi. Jaise 919876543210 -->
-      <a class="row" href="https://wa.me/REPLACE_WHATSAPP_NUMBER">
+      <a class="row" href="https://wa.me/917505488309?text=Hey%20%F0%9F%91%8B">
         <span class="ic c-whatsapp"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></span>
         <span class="txt"><b>WhatsApp</b><small>Chat on WhatsApp</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="REPLACE_FACEBOOK_LINK">
+      <a class="row" href="https://www.facebook.com/share/1G3EwXAS85/">
         <span class="ic c-facebook"><svg aria-hidden="true"><use href="#i-facebook"/></svg></span>
         <span class="txt"><b>Facebook</b><small>Visit our Facebook page</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="REPLACE_YOUTUBE_LINK">
+      <a class="row" href="https://www.youtube.com/@rana-labs">
         <span class="ic c-youtube"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
         <span class="txt"><b>YouTube</b><small>Watch our videos</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -256,76 +222,54 @@
     </div>
   </section>
 
-  <!-- ================= BUSINESS ================= -->
   <section class="sec">
     <h2>Business</h2>
     <div class="list">
 
-      <!-- Google review link: Google Business Profile se "Get more reviews" wala link paste kijiye,
-           ya place id ke saath yeh format use kijiye -->
       <a class="row" href="https://search.google.com/local/writereview?placeid=REPLACE_GOOGLE_PLACE_ID">
         <span class="ic c-review"><svg aria-hidden="true"><use href="#i-star"/></svg></span>
         <span class="txt"><b>Google Review</b><small>Leave a 5-star review</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <!-- Menu: PDF / Google Drive / website ka link -->
       <a class="row" href="REPLACE_MENU_LINK">
         <span class="ic c-menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></span>
         <span class="txt"><b>Menu</b><small>See our menu</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <!-- Payment: pa = aapki UPI ID, pn = aapka naam (spaces ki jagah %20). Jaise:
-           upi://pay?pa=sameer@upi&pn=Sameer%20Rana&cu=INR -->
-      <a class="row" href="upi://pay?pa=REPLACE_UPI_ID&pn=REPLACE_PAYEE_NAME&cu=INR">
+      <a class="row" href="upi://pay?pa=7505488309-2@axl&pn=Sameer%20%20.&mc=0000&mode=02&purpose=00">
         <span class="ic c-pay"><svg aria-hidden="true"><use href="#i-pay"/></svg></span>
         <span class="txt"><b>Payment</b><small>Pay with any UPI app</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <!-- Wi-Fi: dabane par naam aur password dikhta hai, copy button ke saath -->
-      <button class="row" type="button" id="wifiBtn" aria-expanded="false" aria-controls="wifiBox"
-        data-ssid="REPLACE_WIFI_NAME" data-pass="REPLACE_WIFI_PASSWORD">
-        <span class="ic c-wifi"><svg aria-hidden="true"><use href="#i-wifi"/></svg></span>
-        <span class="txt"><b>Wi-Fi</b><small>Tap to see name and password</small></span>
-        <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
-      </button>
-      <div class="wifi-box" id="wifiBox" hidden>
-        <div class="kv"><div><span>Network name</span><strong id="wifiSsid"></strong></div>
-          <button class="copy" type="button" data-copy="ssid"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div>
-        <div class="kv"><div><span>Password</span><strong id="wifiPass"></strong></div>
-          <button class="copy" type="button" data-copy="pass"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div>
-      </div>
-
     </div>
   </section>
 
-  <!-- ================= CONTACT ================= -->
   <section class="sec">
     <h2>Contact</h2>
     <div class="list">
 
-      <a class="row" href="tel:REPLACE_PHONE_NUMBER">
+      <a class="row" href="tel:917505488309">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
         <span class="txt"><b>Call</b><small>Call us directly</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="mailto:REPLACE_EMAIL">
+      <a class="row" href="mailto:skrsameer0786@gmail.com">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
         <span class="txt"><b>Email</b><small>Send us an email</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <!-- Location: Google Maps mein "Share" dabakar link copy karke yahan paste kijiye -->
       <a class="row" href="REPLACE_GOOGLE_MAPS_LINK">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>
         <span class="txt"><b>Location</b><small>Open in Google Maps</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="REPLACE_WEBSITE_LINK">
+      <a class="row" href="https://nfctrust.online">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>
         <span class="txt"><b>Website</b><small>Visit our website</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -334,13 +278,11 @@
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
   <footer class="foot">
     <p>Made with <b>NFC Trust</b></p>
     <div class="by">
       <span>Website created by Sameer</span>
-      <!-- apna Instagram link yahan lagaiye -->
-      <a class="igbtn" id="igBtn" href="https://instagram.com/REPLACE_CREATOR_INSTAGRAM">
+      <a class="igbtn" id="igBtn" href="https://instagram.com/trigger_craft_x">
         <svg aria-hidden="true"><use href="#i-instagram"/></svg>Instagram
       </a>
     </div>
@@ -353,8 +295,7 @@
 (function () {
   'use strict';
 
-  /* true karne par jin rows mein REPLACE bacha hai woh page se chhup jaati hain (live karne se pehle true kar dijiye) */
-  var HIDE_UNSET_ROWS = false;
+  var HIDE_UNSET_ROWS = true;
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -364,7 +305,6 @@
   var isAndroid = /Android/i.test(ua);
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- toast ---- */
   var toastEl = $('#toast'), toastT;
   function toast(msg) {
     toastEl.textContent = msg;
@@ -373,7 +313,6 @@
     toastT = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
   }
 
-  /* ---- jin links mein REPLACE bacha hai ---- */
   $$('a.row').forEach(function (a) {
     if (isUnset(a.getAttribute('href'))) {
       if (HIDE_UNSET_ROWS) { a.hidden = true; a.style.display = 'none'; return; }
@@ -384,7 +323,6 @@
     }
   });
 
-  /* ---- WhatsApp: Android par seedha app mein chat khulti hai (beech ka page nahi) ---- */
   $$('a[href^="https://wa.me/"]').forEach(function (a) {
     if (isUnset(a.href) || !isAndroid) return;
     a.addEventListener('click', function (e) {
@@ -395,23 +333,25 @@
       document.addEventListener('visibilitychange', mark, { once: true });
       window.addEventListener('pagehide', mark, { once: true });
       location.href = 'whatsapp://send?phone=' + num + (txt ? '&text=' + encodeURIComponent(txt) : '');
-      /* agar app nahi mila to normal link par chale jao */
       setTimeout(function () { if (!left && !document.hidden) location.href = fallback; }, 1200);
     });
   });
 
-  /* ---- Wi-Fi ---- */
+  /* ---- Wi-Fi (Safeguarded) ---- */
   var wBtn = $('#wifiBtn'), wBox = $('#wifiBox');
-  var ssid = wBtn.dataset.ssid, pass = wBtn.dataset.pass;
-  if (isUnset(ssid) && HIDE_UNSET_ROWS) { wBtn.style.display = 'none'; }
-  $('#wifiSsid').textContent = ssid;
-  $('#wifiPass').textContent = pass;
-  wBtn.addEventListener('click', function () {
-    if (isUnset(ssid) || isUnset(pass)) { toast('Wi-Fi details are not set yet. Replace them in all.html'); return; }
-    var open = wBox.hidden;
-    wBox.hidden = !open;
-    wBtn.setAttribute('aria-expanded', String(open));
-  });
+  if (wBtn && wBox) {
+    var ssid = wBtn.dataset.ssid, pass = wBtn.dataset.pass;
+    if (isUnset(ssid) && HIDE_UNSET_ROWS) { wBtn.style.display = 'none'; }
+    $('#wifiSsid').textContent = ssid;
+    $('#wifiPass').textContent = pass;
+    wBtn.addEventListener('click', function () {
+      if (isUnset(ssid) || isUnset(pass)) { toast('Wi-Fi details are not set yet.'); return; }
+      var open = wBox.hidden;
+      wBox.hidden = !open;
+      wBtn.setAttribute('aria-expanded', String(open));
+    });
+  }
+
   function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
     return new Promise(function (res, rej) {
@@ -426,16 +366,15 @@
   }
   $$('[data-copy]').forEach(function (b) {
     b.addEventListener('click', function () {
-      var what = b.dataset.copy === 'ssid' ? ssid : pass;
-      copyText(what).then(function () { toast('Copied'); }, function () { toast('Could not copy. Please copy it by hand.'); });
+      var what = b.dataset.copy === 'ssid' ? (ssid || '') : (pass || '');
+      copyText(what).then(function () { toast('Copied'); }, function () { toast('Could not copy.'); });
     });
   });
 
-  /* ---- Save contact (.vcf): naam header ke <h1> se, number data-phone se ---- */
   $('#saveBtn').addEventListener('click', function () {
     var d = this.dataset;
     var name = $('#brandName').textContent.trim();
-    if (isUnset(d.phone)) { toast('Phone number is not set yet. Replace it in all.html'); return; }
+    if (isUnset(d.phone)) { toast('Phone number is not set yet.'); return; }
     var parts = name.split(/\s+/), family = parts.length > 1 ? parts.pop() : '', given = parts.join(' ');
     var lines = ['BEGIN:VCARD', 'VERSION:3.0', 'FN:' + name, 'N:' + family + ';' + given + ';;;', 'TEL;TYPE=CELL:' + d.phone];
     if (!isUnset(d.email)) lines.push('EMAIL:' + d.email);
@@ -444,7 +383,6 @@
     var blob = new Blob([lines.join('\r\n')], { type: 'text/vcard;charset=utf-8' });
     var url = URL.createObjectURL(blob);
     if (isIOS) {
-      /* iPhone: seedha "Add contact" screen khulti hai */
       location.href = url;
     } else {
       var a = document.createElement('a');
@@ -455,11 +393,10 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 15000);
   });
 
-  /* ---- footer Instagram: sparkle, phir link khulta hai ---- */
   var ig = $('#igBtn');
   ig.addEventListener('click', function (e) {
     var href = ig.getAttribute('href');
-    if (isUnset(href)) { e.preventDefault(); toast('This link is not set yet. Replace it in all.html'); return; }
+    if (isUnset(href)) { e.preventDefault(); toast('This link is not set yet.'); return; }
     if (reduceMotion) return;
     e.preventDefault();
     var r = ig.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
@@ -477,7 +414,6 @@
     setTimeout(function () { location.href = href; }, 450);
   });
 
-  /* ---- jis section ki saari rows chhup gayi, woh section bhi chhupao ---- */
   $$('.sec').forEach(function (s) {
     var any = $$('.row', s).some(function (r) { return r.style.display !== 'none'; });
     if (!any) s.style.display = 'none';
