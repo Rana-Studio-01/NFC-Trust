@@ -4,18 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>Sameer Rana | Digital Card</title>
+<title>Lakshi footwear | Digital Card</title>
 <meta name="description" content="Tap to connect: Instagram, WhatsApp, YouTube, Google review, menu, payment and more.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!--
-  all.html - NFC card page (HTML + CSS + JS, ek hi file)
-  - Naam: header ke <h1> mein. Save contact mein wahi naam jaata hai.
-  - Number: Save contact button ke data-phone mein (country code ke saath).
-  - HIDE_UNSET_ROWS = true: jin rows mein REPLACE bacha hai woh chhup jaati hain.
--->
 
 <style>
   :root{
@@ -26,6 +19,7 @@
     --text:#f5f5f5;
     --muted:#9a9a9a;
     --yellow:#FFC400;
+    --yellow-soft:rgba(255,196,0,.14);
     --blue:#1D6BFF;
     --radius:16px;
   }
@@ -96,6 +90,7 @@
   .c-review svg{fill:#F4B400}
   .c-menu{background:#FF7A00}
   .c-pay{background:#0F9D58}
+  .c-wifi{background:var(--yellow);color:#000}
   .c-plain{background:var(--surface-2);color:var(--yellow);border:1px solid var(--line)}
 
   .foot{margin-top:34px;text-align:center;color:var(--muted);font-size:13px}
@@ -168,39 +163,42 @@
 
   <header class="top">
     <img class="logo" src="logo.png" alt="Logo" width="40" height="40" onerror="this.style.display='none'">
-    <h1 id="brandName">Sameer Rana</h1>
+    <h1 id="brandName">Lakshi footwear</h1>
 
-    <!-- Save contact: phone ki "New contact" screen khulti hai, naam + number pehle se bhare hue -->
-    <button class="save" id="saveBtn" type="button" data-phone="+917505488309">
+    <button class="save" id="saveBtn" type="button" data-phone="replace">
       <svg aria-hidden="true"><use href="#i-contact"/></svg><span>Save<span class="long"> contact</span></span>
     </button>
   </header>
 
   <p class="intro">All platforms in one place. Tap any link to connect.</p>
 
+  <!-- ================= SOCIAL ================= -->
   <section class="sec">
     <h2>Social</h2>
     <div class="list">
 
-      <a class="row" href="https://www.instagram.com/trigger_craft_x">
+      <!-- Instagram Link Set -->
+      <a class="row" href="https://www.instagram.com/lakshi_footwear_up12jents_mart">
         <span class="ic c-instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
         <span class="txt"><b>Instagram</b><small>Follow on Instagram</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="https://wa.me/917505488309?text=Hey%20%F0%9F%91%8B">
+      <!-- WhatsApp Channel Link Set -->
+      <a class="row" href="https://whatsapp.com/channel/0029VbE09JCAInPfP7Fjc73i">
         <span class="ic c-whatsapp"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></span>
-        <span class="txt"><b>WhatsApp</b><small>Chat on WhatsApp</small></span>
-        <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
+        <span class="txt"><b>WhatsApp Channel</b><small>Join our WhatsApp channel</small></span>
+        <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg></span>
       </a>
 
-      <a class="row" href="https://www.facebook.com/share/1G3EwXAS85/">
+      <!-- Baaki saare social links REPLACE ki wajah se apne aap chup jayenge -->
+      <a class="row" href="REPLACE_FACEBOOK_LINK">
         <span class="ic c-facebook"><svg aria-hidden="true"><use href="#i-facebook"/></svg></span>
         <span class="txt"><b>Facebook</b><small>Visit our Facebook page</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="https://www.youtube.com/@rana-labs">
+      <a class="row" href="REPLACE_YOUTUBE_LINK">
         <span class="ic c-youtube"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
         <span class="txt"><b>YouTube</b><small>Watch our videos</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -209,11 +207,12 @@
     </div>
   </section>
 
+  <!-- ================= BUSINESS ================= -->
   <section class="sec">
     <h2>Business</h2>
     <div class="list">
 
-      <a class="row" href="https://search.google.com/local/writereview?placeid=REPLACE_GOOGLE_PLACE_ID">
+      <a class="row" href="REPLACE_GOOGLE_PLACE_ID">
         <span class="ic c-review"><svg aria-hidden="true"><use href="#i-star"/></svg></span>
         <span class="txt"><b>Google Review</b><small>Leave a 5-star review</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -225,7 +224,7 @@
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="upi://pay?pa=7505488309-2@axl&pn=Sameer%20Rana&mc=0000&mode=02&purpose=00">
+      <a class="row" href="REPLACE_UPI_LINK">
         <span class="ic c-pay"><svg aria-hidden="true"><use href="#i-pay"/></svg></span>
         <span class="txt"><b>Payment</b><small>Pay with any UPI app</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -234,17 +233,18 @@
     </div>
   </section>
 
+  <!-- ================= CONTACT ================= -->
   <section class="sec">
     <h2>Contact</h2>
     <div class="list">
 
-      <a class="row" href="tel:+917505488309">
+      <a class="row" href="tel: replace">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
         <span class="txt"><b>Call</b><small>Call us directly</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="mailto:skrsameer0786@gmail.com">
+      <a class="row" href="mailto: replace">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
         <span class="txt"><b>Email</b><small>Send us an email</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -256,7 +256,7 @@
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
 
-      <a class="row" href="https://nfctrust.online">
+      <a class="row" href="https: replace">
         <span class="ic c-plain"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>
         <span class="txt"><b>Website</b><small>Visit our website</small></span>
         <svg class="go" aria-hidden="true"><use href="#i-chev"/></svg>
@@ -282,14 +282,12 @@
 (function () {
   'use strict';
 
-  /* true: jin rows mein REPLACE bacha hai woh chhup jaati hain */
   var HIDE_UNSET_ROWS = true;
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var isUnset = function (v) { return !v || v.indexOf('REPLACE') !== -1; };
   var ua = navigator.userAgent;
-  var isAndroid = /Android/i.test(ua);
   var isIOS = /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -301,7 +299,7 @@
     toastT = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
   }
 
-  /* ---- jin links mein REPLACE bacha hai ---- */
+  // Hide rows containing 'REPLACE' if HIDE_UNSET_ROWS is true
   $$('a.row').forEach(function (a) {
     if (isUnset(a.getAttribute('href'))) {
       if (HIDE_UNSET_ROWS) { a.hidden = true; a.style.display = 'none'; return; }
@@ -312,58 +310,16 @@
     }
   });
 
-  /* ---- WhatsApp: sirf Android par seedha app mein chat; iPhone/laptop par normal link ---- */
-  $$('a[href^="https://wa.me/"]').forEach(function (a) {
-    if (isUnset(a.href) || !isAndroid) return;
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      var u = new URL(a.href), num = u.pathname.replace(/\D/g, ''), txt = u.searchParams.get('text');
-      var left = false, fallback = a.href;
-      var mark = function () { left = true; };
-      document.addEventListener('visibilitychange', mark, { once: true });
-      window.addEventListener('pagehide', mark, { once: true });
-      location.href = 'whatsapp://send?phone=' + num + (txt ? '&text=' + encodeURIComponent(txt) : '');
-      setTimeout(function () { if (!left && !document.hidden) location.href = fallback; }, 1200);
-    });
-  });
-
-  /* ---- Save contact ----
-     Android: phone ki "New contact" screen seedha khulti hai (naam + number bhare hue),
-              wahin se Phone / SIM / Google account chunkar save hota hai. File download nahi.
-     iPhone : Apple web se contacts screen kholne nahi deta; contact card khulta hai, "Create New Contact" dabaiye.
-     Laptop : .vcf file download. */
+  // Direct Contact / Dialer Integration
   $('#saveBtn').addEventListener('click', function () {
-    var phone = this.getAttribute('data-phone'), name = $('#brandName').textContent.trim();
-    if (isUnset(phone)) { toast('Phone number is not set yet.'); return; }
-
-    var p = name.split(/\s+/), fam = p.length > 1 ? p.pop() : '', giv = p.join(' ');
-    var card = ['BEGIN:VCARD', 'VERSION:3.0', 'FN:' + name, 'N:' + fam + ';' + giv + ';;;', 'TEL;TYPE=CELL:' + phone, 'END:VCARD'].join('\r\n');
-    var url = URL.createObjectURL(new Blob([card], { type: 'text/vcard;charset=utf-8' }));
-    setTimeout(function () { URL.revokeObjectURL(url); }, 20000);
-
-    function download() {
-      var a = document.createElement('a');
-      a.href = url; a.download = name.replace(/\s+/g, '_') + '.vcf';
-      document.body.appendChild(a); a.click(); a.remove();
-      toast('Contact file ready. Open it to save.');
+    var phone = this.getAttribute('data-phone');
+    if (isUnset(phone)) {
+      toast('Phone number is not set yet.');
+      return;
     }
-
-    if (isAndroid) {
-      var gone = false, mark = function () { gone = true; };
-      document.addEventListener('visibilitychange', mark, { once: true });
-      window.addEventListener('pagehide', mark, { once: true });
-      location.href = 'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=' +
-        encodeURIComponent(name) + ';S.phone=' + encodeURIComponent(phone) + ';end';
-      /* agar browser contacts screen na khol paye to file ka rasta */
-      setTimeout(function () { if (!gone && !document.hidden) download(); }, 1800);
-    } else if (isIOS) {
-      location.href = url;
-    } else {
-      download();
-    }
+    window.location.href = 'tel:' + phone;
   });
 
-  /* ---- footer Instagram: sparkle, phir link ---- */
   var ig = $('#igBtn');
   ig.addEventListener('click', function (e) {
     var href = ig.getAttribute('href');
@@ -385,7 +341,7 @@
     setTimeout(function () { location.href = href; }, 450);
   });
 
-  /* ---- jis section ki saari rows chhup gayi, woh section bhi chhupao ---- */
+  // Automatically hide empty sections if all their child rows are hidden
   $$('.sec').forEach(function (s) {
     var any = $$('.row', s).some(function (r) { return r.style.display !== 'none'; });
     if (!any) s.style.display = 'none';
